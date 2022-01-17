@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  font-family: 'Roboto', Verdana, sans-serif;
+}
+
+a {
+  margin: 10px;
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-bottom: solid rgb(0, 0, 0) 3px;
+  border-radius: 30%;
+  transition: background-color .5s ease-in-out;
+}
+
+a:hover {
+  background-color: rgb(200, 230, 250);
+  border-bottom: hidden;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: linear-gradient(to top right, rgb(240, 80, 80), rgb(240, 130, 130));
+}
+
+.Header-logo {
+  height: 50px;
+  pointer-events: none;
+}
+
+.Nav {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  font-size: large;
+  font-weight: bold;
+}
+
+.Main, .Contacts, .About, .Error {
+  flex: 1;
+  background: rgb(168, 210, 245);
+  background: linear-gradient(to top right, rgb(200, 230, 250), rgb(200, 255, 255));
+}
+
+.Main {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.Form {
+  width: 100vh;
+  margin: 20px 0;
+  padding: 20px 30px;
+  border-left: solid rgb(0, 0, 0) 5px;
+  border-radius: 5%;
+}
+
+input[type=text] {
+  height: 30px;
+  background: unset;
+  border: none;
+  border-bottom: solid rgb(0, 0, 0) 3px;
+  font-size: medium;
+  transition: all .5s ease-in-out;
+}
+
+input[type=text]:focus {
+  outline: unset;
+  border-bottom: solid rgb(240, 80, 80) 3px;
+  box-shadow: rgb(240, 80, 80) 3px 3px 3px;
+}
+
+input[type=text]::placeholder {
+  font-style: italic;
+}
+
+input[type=submit] {
+  display: block;
+  margin-top: 30px;
+  padding: 15px;
+  font-size: large;
+
+  border-radius: 5%;
+}
+
+select {
+  font-size: medium;
+  padding: 5px;
+  border: none;
+  background: unset;
+  box-shadow: black 2px 2px 2px;
+}
+
+.About h1, .About p{
+  text-align: center;
+  line-height: 5px;
+}
+
+.Contacts, .Error {
+  text-align: center;
+}
+
+.Contacts li {
+  list-style: none;
+}
+
+.Footer {
+  text-align: center;
+  background: linear-gradient(to top right, rgb(240, 80, 80), rgb(240, 140, 140));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Header-logo {
+    animation: Header-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes Header-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
