@@ -1,5 +1,5 @@
-import Logo from "../img/logo192.png";
-import Nav from "./Nav";
+import Logo from '../img/logo192.png';
+import Nav from './Nav';
 
 function Header() {
   return (

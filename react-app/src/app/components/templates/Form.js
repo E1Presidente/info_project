@@ -1,7 +1,13 @@
-import { useState } from "react";
+import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {inputChange} from '../../../redux/actions';
 
-function Form({name, options, submit}) {
+function Form({ name, options, submit }) {
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const dispatch = useDispatch();
+  const inputText = useSelector(state => {
+    console.log(state);
+  });
 
   const inputCheck = event => {
     console.log(event.target.value);
@@ -10,6 +16,7 @@ function Form({name, options, submit}) {
     } else if (!event.target.value && buttonDisabled === false) {
       setButtonDisabled(true);
     }
+    dispatch(inputChange(event.target.value));
   };
 
   const formSubmit = event => {

@@ -1,4 +1,4 @@
-import Form from "./elements/Form";
+import Form from './templates/Form';
 
 function Main() {
   const repeatActions = [

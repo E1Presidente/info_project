@@ -16,7 +16,7 @@ a {
 
 a:hover {
   background-color: rgb(200, 230, 250);
-  border-bottom: hidden;
+  box-shadow: 5px 3px 3px rgb(0, 0, 0);
 }
 
 .App {
@@ -30,7 +30,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: linear-gradient(to top right, rgb(240, 80, 80), rgb(240, 130, 130));
+  background: linear-gradient(to top left, rgb(240, 80, 80), rgb(240, 130, 130));
 }
 
 .Header-logo {
@@ -48,8 +48,7 @@ a:hover {
 
 .Main, .Contacts, .About, .Error {
   flex: 1;
-  background: rgb(168, 210, 245);
-  background: linear-gradient(to top right, rgb(200, 230, 250), rgb(200, 255, 255));
+  background: linear-gradient(to top left, rgb(200, 230, 250), rgb(200, 255, 255));
 }
 
 .Main {
@@ -90,8 +89,20 @@ input[type=submit] {
   margin-top: 30px;
   padding: 15px;
   font-size: large;
+  border: hidden;
+  border-radius: 10%;
+  background-color: rgb(168, 210, 245);
+  transition: all .5s ease-in-out;
+}
 
-  border-radius: 5%;
+input[type=submit]:enabled {
+  background-color: rgb(240, 80, 80);
+  box-shadow: 5px 3px 3px rgb(0, 0, 0);
+}
+
+input[type=submit]:enabled:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to top left, rgb(240, 80, 80), rgb(240, 130, 130));
 }
 
 select {
@@ -117,7 +128,7 @@ select {
 
 .Footer {
   text-align: center;
-  background: linear-gradient(to top right, rgb(240, 80, 80), rgb(240, 140, 140));
+  background: linear-gradient(to top left, rgb(240, 80, 80), rgb(240, 140, 140));
 }
 
 @media (prefers-reduced-motion: no-preference) {
