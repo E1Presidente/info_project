@@ -1,10 +1,26 @@
-const initialState = null;
+const initialState = {
+    infoInput: "",
+    operationInput: "",
+    controlInput: ""
+};
 
 export const formReducer = (state = initialState, action) => {
-    console.log(state);
     switch(action.type) {
-        case 'INPUT_TEXT':
-            return state = action.text
+        case 'INFO_TEXT':
+            return {
+                ...state,
+                infoInput: action.text
+            }
+        case 'OPERATION_TEXT':
+            return {
+                ...state,
+                operationInput: action.text
+            }
+        case 'CONTROL_TEXT':
+            return {
+                ...state,
+                controlInput: action.text
+            }
         default:
             return state;
     } 

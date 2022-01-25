@@ -1,6 +1,20 @@
-export const inputChange = text => {
+export const infoInput = text => {
     return {
-        type: 'INPUT_TEXT',
+        type: 'INFO_TEXT',
+        text
+    }
+};
+
+export const operationInput = text => {
+    return {
+        type: 'OPERATION_TEXT',
+        text
+    }
+};
+
+export const controlInput = text => {
+    return {
+        type: 'CONTROL_TEXT',
         text
     }
 };
