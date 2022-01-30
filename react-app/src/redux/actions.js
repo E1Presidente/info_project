@@ -18,3 +18,24 @@ export const controlInput = text => {
         text
     }
 };
+
+export const operationSelect = option => {
+    return {
+        type: 'OPERATION_SELECT',
+        option
+    }
+}
+
+export const controlSelect = option => {
+    return {
+        type: 'CONTROL_SELECT',
+        option
+    }
+}
+
+export const searchResult = result => {
+    return {
+        type: 'SET_RESULT',
+        result
+    }
+}

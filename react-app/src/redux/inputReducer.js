@@ -1,10 +1,10 @@
 const initialState = {
-    infoInput: "",
-    operationInput: "",
-    controlInput: ""
+    infoInput: '',
+    operationInput: '',
+    controlInput: ''
 };
 
-export const formReducer = (state = initialState, action) => {
+export const inputReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'INFO_TEXT':
             return {

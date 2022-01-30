@@ -1,9 +1,14 @@
-function Request() {
-  return (
-    <div className="Request">
+const path = 'http://localhost:3500'
 
-    </div>
-  );
-}
+export const request = (data, option) => {
+  if (!data) {
+    return {
+      status: 400
+    }
+  } else if (option) {
 
-export default Request;
+  } else {
+    fetch(`${path}/`)
+    .then(responce => console.log(responce))
+  }
+};

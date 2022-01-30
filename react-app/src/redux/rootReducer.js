@@ -1,6 +1,10 @@
 import {combineReducers} from 'redux';
-import {formReducer} from './formReducer';
+import {inputReducer} from './inputReducer';
+import {selectReducer} from './selectReducer';
+import {resultReducer} from './resultReducer';
 
 export const rootReducer = combineReducers({
-    formReducer
+    inputReducer, 
+    selectReducer,
+    resultReducer
 });

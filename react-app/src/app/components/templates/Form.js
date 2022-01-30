@@ -1,39 +1,41 @@
 import {useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import Loader from './Loader';
+import {request} from './Request';
 
-function Form({name, options, submit, reducer, action}) {
-  let inputSelectorValue
+function Form({name, submit, input, select, actions, result}) {
   const inputRef = useRef();
+  const [submitDisabled, setSubmitDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const dispatch = useDispatch();
 
-  useSelector(state => {
-    console.log("Select render");
-    if (state[reducer][action.name]) {
-      inputSelectorValue = state[reducer][action.name];
-      return null;
-    }
-  });
-
   useEffect(() => {
-    if (inputSelectorValue && buttonDisabled) {
-      inputRef.current.value = inputSelectorValue;
+    if (input && submitDisabled) {
+      inputRef.current.value = input;
+      setSubmitDisabled(false);
+    }
+    if (result && buttonDisabled) {
       setButtonDisabled(false);
     }
-  }, [inputSelectorValue, buttonDisabled]);
+  }, [input, submitDisabled, buttonDisabled]);
 
   const inputChange = event => {
-    if (event.target.value && buttonDisabled === true) {
-      setButtonDisabled(false);  
-    } else if (!event.target.value && buttonDisabled === false) {
-      setButtonDisabled(true);
+    if (event.target.value && submitDisabled === true) {
+      setSubmitDisabled(false);  
+    } else if (!event.target.value && submitDisabled === false) {
+      setSubmitDisabled(true);
     }
-    dispatch(action(event.target.value));
+    dispatch(actions.input(event.target.value));
+  };
+
+  const selectChange = event => {
+    console.log(event.target.value);
+    dispatch(actions.select(event.target.value));
   };
 
   const formSubmit = event => {
     event.preventDefault();
-    console.log("click");
+    console.log(event.target.elements);
   }
 
   console.log("Form render");
@@ -42,19 +44,26 @@ function Form({name, options, submit, reducer, action}) {
     <div className="Form">
       <h1>{name}</h1>
       <form onSubmit={formSubmit}>
-        <label><p>Input computer name:</p> <input type="text" placeholder="Enter here..." ref={inputRef} onInput={inputChange} /></label>
-        {options ?
+        <label>
+          <p>Input computer name:</p>
+          <input type="text" placeholder="Enter here..." ref={inputRef} onInput={inputChange} />
+        </label>
+        {select ?
           <>
             <p>Choose action:</p>
-            <select>
-              {options.map(element =>
+            <select defaultValue={select.selected} onChange={selectChange} >
+              {select.options.map(element =>
                 <option value={element} key={element}>{element}</option>
               )}
             </select>
           </> 
           : null
         }
-        <input type="submit" value={submit} disabled={buttonDisabled} />
+        <input type="submit" value={submit} disabled={submitDisabled} />
+        {!select ? 
+          <button disabled={buttonDisabled}>Previous</button>
+          : null
+        }
       </form>
     </div>
   );

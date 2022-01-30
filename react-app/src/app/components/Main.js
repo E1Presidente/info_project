@@ -1,37 +1,44 @@
+import {useSelector} from 'react-redux';
+import {infoInput, operationInput, controlInput, operationSelect, controlSelect} from '../../redux/actions';
 import Form from './templates/Form';
-import {infoInput, operationInput, controlInput} from '../../redux/actions';
 
 function Main() {
-  const operationOptions = [
-    "Hardware",
-    "1C"
-  ]
-  const controlOptions = [
-    "Share",
-    "Remote access"
-  ]
+  let inputProps;
+  let selectProps;
+  let resultProps;
+
+  useSelector(state => {
+    console.log('Main selector update');
+    console.log(state);
+    inputProps = state.inputReducer;
+    selectProps = state.selectReducer;
+    resultProps = state.resultReducer;
+  });
+
+  console.log('Main render');
 
   return (
     <div className="Main">
       <Form 
         name={"Get hardware info"} 
-        submit={"Search"} 
-        reducer={"formReducer"} 
-        action={infoInput}
+        submit={"Search"}
+        input={inputProps.infoInput} 
+        actions={{"input": infoInput}}
+        result={resultProps.result}
       />
       <Form 
         name={"Repeat operation to get latest information"} 
-        option={operationOptions} 
         submit={"Commit"} 
-        reducer={"formReducer"}
-        action={operationInput} 
+        input={inputProps.operationInput}
+        select={{"options": selectProps.operationSelect, "selected": selectProps.operationSelected}}
+        actions={{"input": operationInput, "select": operationSelect}}
       />
       <Form 
         name={"Open remote control on computer"} 
-        option={controlOptions} 
-        submit={"Commit"} 
-        reducer={"formReducer"} 
-        action={controlInput}
+        submit={"Commit"}
+        input={inputProps.controlInput} 
+        select={{"options": selectProps.controlSelect, "selected": selectProps.controlSelected}}
+        actions={{"input": controlInput, "select": controlSelect}}
       />
     </div>
   );
