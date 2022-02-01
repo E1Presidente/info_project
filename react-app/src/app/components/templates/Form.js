@@ -1,12 +1,13 @@
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import Loader from './Loader';
 import {request} from './Request';
+import Response from './Response';
 
 function Form({name, submit, input, select, actions, result}) {
   const inputRef = useRef();
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [formSubmit, setFormSubmit] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,10 +15,10 @@ function Form({name, submit, input, select, actions, result}) {
       inputRef.current.value = input;
       setSubmitDisabled(false);
     }
-    if (result && buttonDisabled) {
+    if (!result && buttonDisabled) {
       setButtonDisabled(false);
     }
-  }, [input, submitDisabled, buttonDisabled]);
+  }, [input, result, submitDisabled, buttonDisabled]);
 
   const inputChange = event => {
     if (event.target.value && submitDisabled === true) {
@@ -33,38 +34,49 @@ function Form({name, submit, input, select, actions, result}) {
     dispatch(actions.select(event.target.value));
   };
 
-  const formSubmit = event => {
+  const formSubmitting = event => {
     event.preventDefault();
-    console.log(event.target.elements);
+    setFormSubmit(true);
+    console.log(event.target);
+  }
+
+  const buttonClick = (event) => {
+    event.preventDefault();
+    request(123, 123);
   }
 
   console.log("Form render");
 
   return (
     <div className="Form">
-      <h1>{name}</h1>
-      <form onSubmit={formSubmit}>
-        <label>
-          <p>Input computer name:</p>
-          <input type="text" placeholder="Enter here..." ref={inputRef} onInput={inputChange} />
-        </label>
-        {select ?
-          <>
-            <p>Choose action:</p>
-            <select defaultValue={select.selected} onChange={selectChange} >
-              {select.options.map(element =>
-                <option value={element} key={element}>{element}</option>
-              )}
-            </select>
-          </> 
-          : null
-        }
-        <input type="submit" value={submit} disabled={submitDisabled} />
-        {!select ? 
-          <button disabled={buttonDisabled}>Previous</button>
-          : null
-        }
-      </form>
+      {!formSubmit ?
+        <>
+          <h1>{name}</h1>
+          <form onSubmit={formSubmitting}>
+            <label>
+              <p>Input computer name:</p>
+              <input type="text" placeholder="Enter here..." ref={inputRef} onInput={inputChange} />
+            </label>
+            {select ?
+              <>
+                <p>Choose action:</p>
+                <select defaultValue={select.selected} onChange={selectChange} >
+                  {select.options.map(element =>
+                    <option value={element} key={element}>{element}</option>
+                  )}
+                </select>
+              </> 
+              : null
+            }
+            <input type="submit" value={submit} disabled={submitDisabled} />
+            {!select ? 
+              <button disabled={buttonDisabled} onClick={buttonClick} >Previous</button>
+              : null
+            }
+          </form>
+        </>
+        : <Response />
+      }
     </div>
   );
 }
